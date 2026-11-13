@@ -1,130 +1,192 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EthicAI — IA intelligente, zéro fuite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --ink:#13251e; --muted:#66766f; --line:#e8efeb; --mint:#d8fae8; --mint-2:#effcf4; --green:#10b981; --green-dark:#087c59; --card:#f8fafc; --shadow:0 18px 55px rgba(18, 67, 48, .08); }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { margin:0; color:var(--ink); background:#fff; font-family:'Plus Jakarta Sans',sans-serif; -webkit-font-smoothing:antialiased; }
-    a { color:inherit; text-decoration:none; }
-    .wrap { width:min(1120px, calc(100% - 44px)); margin:0 auto; }
-    .nav { display:flex; justify-content:space-between; align-items:center; height:82px; }
-    .brand { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:-.05em; font-size:20px; }
-    .brand-mark { width:31px; height:31px; display:grid; place-items:center; color:#fff; background:var(--green); border-radius:10px; box-shadow:0 6px 12px #10b98133; }
-    .brand-mark svg { width:19px; height:19px; }
-    .nav-links { display:flex; align-items:center; gap:31px; color:#718079; font-size:13px; font-weight:600; }
-    .nav-links a:hover { color:var(--green-dark); }
-    .nav-cta { color:var(--green-dark) !important; background:var(--mint); padding:11px 15px; border-radius:10px; }
-    .hero { padding:82px 0 105px; position:relative; overflow:hidden; }
-    .hero:before { content:""; position:absolute; width:540px; height:540px; border-radius:50%; background:#ecfff4; right:-275px; top:-120px; z-index:-1; }
-    .eyebrow { display:inline-flex; align-items:center; gap:8px; border:1px solid #d8f3e3; background:var(--mint-2); border-radius:99px; padding:7px 11px 7px 8px; color:var(--green-dark); font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
-    .pulse { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 4px #10b98119; }
-    h1 { font-size:clamp(44px, 7vw, 76px); letter-spacing:-.075em; line-height:1.02; max-width:850px; margin:23px 0 22px; font-weight:800; }
-    h1 em { color:var(--green); font-style:normal; }
-    .hero-copy { max-width:625px; color:var(--muted); font-size:16px; line-height:1.8; }
-    .actions { display:flex; gap:12px; margin-top:31px; }
-    .button { display:inline-flex; align-items:center; justify-content:center; gap:9px; border-radius:12px; padding:14px 18px; font-size:13px; font-weight:700; transition:transform .2s, box-shadow .2s, background .2s; }
-    .button:hover { transform:translateY(-2px); }
-    .button.primary { background:var(--green); color:white; box-shadow:0 10px 20px #10b98130; }
-    .button.primary:hover { background:#0da875; box-shadow:0 13px 23px #10b98140; }
-    .button.secondary { background:#fff; color:#3d5148; border:1px solid #dce7e1; }
-    .button.secondary:hover { background:var(--card); }
-    .trust-row { display:flex; align-items:center; gap:16px; margin-top:52px; color:#8a9992; font-size:11px; font-weight:600; }
-    .avatars { display:flex; }
-    .avatar { width:26px; height:26px; display:grid; place-items:center; margin-right:-7px; border:2px solid white; border-radius:50%; color:#fff; font-size:9px; font-weight:700; }
-    .a1{background:#96cbb1}.a2{background:#e99c77}.a3{background:#768ec5}.a4{background:#b9a17a}
-    .section { padding:92px 0; }
-    .section.alt { background:#fbfdfc; border-top:1px solid #f1f5f2; border-bottom:1px solid #f1f5f2; }
-    .section-intro { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:36px; }
-    .kicker { color:var(--green-dark); font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
-    h2 { font-size:clamp(30px, 4vw, 45px); letter-spacing:-.06em; line-height:1.08; margin:0; }
-    .section-intro p { max-width:340px; color:var(--muted); line-height:1.7; font-size:13px; margin:0 0 3px; }
-    .preview { background:var(--card); border:1px solid #edf2ef; border-radius:24px; padding:19px; box-shadow:var(--shadow); }
-    .preview-top { display:flex; justify-content:space-between; align-items:center; padding:2px 5px 17px; color:#89958f; font-size:11px; }
-    .status { color:var(--green-dark); display:flex; align-items:center; gap:7px; font-weight:700; }
-    .status i { display:block; width:7px; height:7px; border-radius:50%; background:var(--green); }
-    .response { max-width:770px; margin:0 auto; background:#fff; padding:32px 38px; border:1px solid #edf1ef; border-radius:17px; }
-    .response-label { color:#9baaa3; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.06em; margin-bottom:16px; }
-    .response p { color:#43554c; font-size:15px; line-height:1.95; margin:0; }
-    .tag { position:relative; display:inline-block; margin:0 2px; color:var(--green-dark); background:#dff9eb; padding:2px 8px; border-radius:6px; font-weight:700; cursor:pointer; transition:background .2s; }
-    .tag:hover, .tag.active { background:#aef0cc; }
-    .tag-card { visibility:hidden; opacity:0; pointer-events:none; position:absolute; z-index:3; top:34px; left:50%; width:235px; transform:translateX(-50%) translateY(-4px); padding:13px; background:#17372a; border-radius:11px; color:#fff; box-shadow:0 12px 25px #17372a33; transition:.2s; text-align:left; }
-    .tag-card:before { content:""; position:absolute; top:-5px; left:50%; width:10px; height:10px; background:#17372a; transform:translateX(-50%) rotate(45deg); }
-    .tag.active .tag-card, .tag:hover .tag-card { visibility:visible; opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto; }
-    .tag-card strong { display:block; font-family:'DM Mono',monospace; color:#9ff3c4; font-size:10px; font-weight:500; margin-bottom:6px; }
-    .tag-card span { display:block; font-size:11px; color:#d0e1d8; line-height:1.5; }
-    .tag-card small { display:inline-block; margin-top:8px; padding:3px 6px; color:#b0f0c9; background:#295342; border-radius:5px; font-size:9px; }
-    .hint { text-align:center; color:#9baaa3; font-size:11px; margin:18px 0 1px; }
-    .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-    .step { position:relative; background:#fff; border:1px solid var(--line); border-radius:17px; padding:25px; min-height:210px; }
-    .step:not(:last-child):after { content:"→"; position:absolute; right:-23px; top:50%; color:#9ed8b8; font-size:22px; z-index:2; }
-    .num { display:grid; place-items:center; width:31px; height:31px; border-radius:9px; background:var(--mint); color:var(--green-dark); font-family:'DM Mono',monospace; font-size:11px; margin-bottom:27px; }
-    .step h3, .benefit h3 { margin:0 0 10px; letter-spacing:-.03em; font-size:16px; }
-    .step p, .benefit p { color:var(--muted); line-height:1.7; font-size:12px; margin:0; }
-    .benefits { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .benefit { padding:27px; border-radius:18px; background:var(--card); border:1px solid #eff3f1; min-height:190px; }
-    .benefit-icon { width:39px; height:39px; display:grid; place-items:center; background:var(--mint); color:var(--green-dark); border-radius:12px; margin-bottom:27px; }
-    .benefit-icon svg { width:18px; height:18px; }
-    .pricing { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
-    .price-card { position:relative; padding:30px; border:1px solid var(--line); border-radius:20px; background:#fff; }
-    .price-card.featured { color:#fff; background:#15372a; border-color:#15372a; box-shadow:0 18px 45px rgba(21,55,42,.18); }
-    .price-badge { position:absolute; top:19px; right:19px; padding:6px 9px; border-radius:99px; color:var(--green-dark); background:var(--mint); font-size:10px; font-weight:800; }
-    .price-card h3 { margin:0 0 9px; font-size:18px; letter-spacing:-.04em; }
-    .price-card > p { min-height:43px; margin:0 0 23px; color:var(--muted); font-size:12px; line-height:1.65; }
-    .featured > p { color:#b9d2c5; }
-    .price { display:flex; align-items:baseline; gap:6px; margin-bottom:24px; font-size:12px; color:var(--muted); }
-    .featured .price { color:#b9d2c5; }
-    .price strong { color:var(--ink); font-size:40px; letter-spacing:-.07em; }
-    .featured .price strong { color:#9af0bd; }
-    .price-card ul { display:grid; gap:11px; margin:0; padding:20px 0 0; border-top:1px solid var(--line); list-style:none; color:#53665c; font-size:12px; }
-    .featured ul { border-color:#315342; color:#d7e8de; }
-    .price-card li:before { content:'✓'; display:inline-block; width:20px; color:var(--green); font-weight:800; }
-    footer { padding:61px 0 30px; background:#15372a; color:#fff; }
-    .footer-main { display:flex; justify-content:space-between; align-items:center; gap:30px; padding-bottom:54px; }
-    .footer-main h2 { max-width:440px; color:#eafff1; font-size:32px; }
-    .signup { display:flex; background:#214938; padding:5px; border:1px solid #34644e; border-radius:12px; width:min(100%, 340px); }
-    .signup input { flex:1; min-width:0; background:transparent; border:0; outline:0; color:#fff; padding:0 12px; font:inherit; font-size:11px; }
-    .signup input::placeholder { color:#a8c5b4; }
-    .signup button { border:0; background:#9af0bd; color:#135137; border-radius:8px; padding:11px 14px; font:inherit; font-size:11px; font-weight:800; cursor:pointer; }
-    .footer-bottom { display:flex; justify-content:space-between; padding-top:23px; border-top:1px solid #315342; color:#98b7a6; font-size:10px; }
-    .footer-links { display:flex; gap:20px; }
-    @media(max-width:700px){ .wrap{width:min(100% - 32px, 1120px)} .nav-links a:not(.nav-cta){display:none}.hero{padding:56px 0 75px} .hero-copy{font-size:14px}.section{padding:70px 0}.section-intro,.footer-main{display:block}.section-intro p{margin-top:18px}.steps,.benefits,.pricing{grid-template-columns:1fr}.step:not(:last-child):after{content:"↓"; right:auto; top:auto; bottom:-23px; left:50%;}.response{padding:24px 20px}.response p{font-size:13px}.tag-card{left:0; transform:translateY(-4px)}.tag.active .tag-card,.tag:hover .tag-card{transform:translateY(0)}.footer-main h2{margin-bottom:28px}.footer-bottom{display:block;line-height:2}.footer-links{margin-top:10px} }
-  </style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <header class="wrap nav">
-    <a class="brand" href="#top" aria-label="Accueil EthicAI"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3 5 7v6c0 4.6 3 7.4 7 8 4-.6 7-3.4 7-8V7l-7-4Z"/><path d="m8.5 12 2.3 2.3 4.8-5"/></svg></span>EthicAI</a>
-    <nav class="nav-links" aria-label="Navigation principale"><a href="#how">Comment ça marche</a><a href="#provenance">Provenance</a><a href="#features">Fonctionnalités</a><a href="#pricing">Tarifs</a><a class="nav-cta" href="#start">Commencer <span aria-hidden="true">↗</span></a></nav>
+    <a class="brand" href="#top" aria-label="Accueil EthicAI"><span class="brand-mark"><svg viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 3 5 7v6c0 4.6 3 7.4 7 8 4-.6 7-3.4 7-8V7l-7-4Z" />
+          <path d="m8.5 12 2.3 2.3 4.8-5" />
+        </svg></span>EthicAI</a>
+    <nav class="nav-links" aria-label="Navigation principale"><a href="#how">Comment ça marche</a><a
+        href="#provenance">Provenance</a><a href="#features">Fonctionnalités</a><a href="#pricing">Tarifs</a><a
+        class="nav-cta" href="#start">Commencer <span aria-hidden="true">↗</span></a></nav>
   </header>
 
   <main id="top">
     <section class="hero wrap">
       <div class="eyebrow"><span class="pulse"></span> L’IA en toute confiance</div>
       <h1>IA intelligente. <em>Zéro fuite.</em><br>Des sources 100% vérifiables.</h1>
-      <p class="hero-copy">Un modèle de langage local et léger associé à une base de conformité claire. Exécutez-le entièrement sur votre machine, synchronisez les mises à jour en toute fluidité et retrouvez l’origine exacte de chaque réponse.</p>
-      <div class="actions"><a class="button primary" href="#start">Commencer gratuitement <span>→</span></a><a class="button secondary" href="#how">Voir la documentation <span>↗</span></a></div>
-      <div class="trust-row"><div class="avatars"><span class="avatar a1">AL</span><span class="avatar a2">MK</span><span class="avatar a3">JS</span><span class="avatar a4">+1k</span></div><span>Adopté par des équipes qui avancent sereinement</span></div>
-    </section>
-
-    <section class="section alt" id="provenance">
-      <div class="wrap"><div class="section-intro"><div><div class="kicker">La transparence par nature</div><h2>Chaque réponse<br>a son histoire.</h2></div><p>Visualisez la source d’une réponse sans quitter votre espace de travail. Cliquez sur un tag vert pour consulter l’entrée d’origine.</p></div>
-      <div class="preview"><div class="preview-top"><span>Assistant local / réponse 0042</span><span class="status"><i></i> vérifiée localement</span></div><div class="response"><div class="response-label">RÉPONSE ETHICAI</div><p>Utilisez <span class="tag">React Query<span class="tag-card"><strong>ENTRÉE / LIB-0421</strong><span>Documentation TanStack Query v5, « Exemples de cache »</span><small>Licence MIT</small></span></span> pour gérer l’état serveur et garder votre interface réactive. Le cache peut être configuré avec un <span class="tag">staleTime<span class="tag-card"><strong>ENTRÉE / LIB-0421-B</strong><span>TanStack Query v5 · référence QueryClient</span><small>Licence MIT</small></span></span> adapté à vos besoins de mise à jour. Pour l’authentification, suivez le <span class="tag">flux OAuth 2.0<span class="tag-card"><strong>ENTRÉE / SEC-0087</strong><span>Standard de sécurité interne · protocoles d’identité</span><small>Entreprise responsable</small></span></span> défini dans la politique de sécurité de votre équipe.</p></div><div class="hint">⌁ &nbsp; Survolez ou cliquez sur un tag pour voir sa source</div></div>
+      <p class="hero-copy">Un modèle de langage local et léger associé à une base de conformité claire. Exécutez-le
+        entièrement sur votre machine, synchronisez les mises à jour en toute fluidité et retrouvez l’origine exacte de
+        chaque réponse.</p>
+      <div class="actions"><a class="button primary" href="#start">Commencer gratuitement <span>→</span></a><a
+          class="button secondary" href="#how">Voir la documentation <span>↗</span></a></div>
+      <div class="trust-row">
+        <div class="avatars"><span class="avatar a1">AL</span><span class="avatar a2">MK</span><span
+            class="avatar a3">JS</span><span class="avatar a4">+1k</span></div><span>Adopté par des équipes qui avancent
+          sereinement</span>
       </div>
     </section>
 
-    <section class="section" id="how"><div class="wrap"><div class="section-intro"><div><div class="kicker">Une façon plus simple de travailler</div><h2>Comment fonctionne<br>EthicAI</h2></div><p>Un parcours calme et prévisible, de la connaissance vérifiée jusqu’à une réponse fiable.</p></div><div class="steps"><article class="step"><div class="num">01</div><h3>Serveur central</h3><p>Diffuse des mises à jour sûres et vérifiées pour que chaque nœud reste à jour.</p></article><article class="step"><div class="num">02</div><h3>Nœud local</h3><p>Fonctionne discrètement sur votre ordinateur ou votre réseau d’entreprise. Vos requêtes et votre code ne quittent jamais votre appareil.</p></article><article class="step"><div class="num">03</div><h3>Réponses honnêtes</h3><p>Fournit des réponses précises, ancrées dans votre base, avec attribution instantanée des sources.</p></article></div></div></section>
+    <section class="section alt" id="provenance">
+      <div class="wrap">
+        <div class="section-intro">
+          <div>
+            <div class="kicker">La transparence par nature</div>
+            <h2>Chaque réponse<br>a son histoire.</h2>
+          </div>
+          <p>Visualisez la source d’une réponse sans quitter votre espace de travail. Cliquez sur un tag vert pour
+            consulter l’entrée d’origine.</p>
+        </div>
+        <div class="preview">
+          <div class="preview-top"><span>Assistant local / réponse 0042</span><span class="status"><i></i> vérifiée
+              localement</span></div>
+          <div class="response">
+            <div class="response-label">RÉPONSE ETHICAI</div>
+            <p>Utilisez <span class="tag">React Query<span class="tag-card"><strong>ENTRÉE /
+                    LIB-0421</strong><span>Documentation TanStack Query v5, « Exemples de cache »</span><small>Licence
+                    MIT</small></span></span> pour gérer l’état serveur et garder votre interface réactive. Le cache
+              peut être configuré avec un <span class="tag">staleTime<span class="tag-card"><strong>ENTRÉE /
+                    LIB-0421-B</strong><span>TanStack Query v5 · référence QueryClient</span><small>Licence
+                    MIT</small></span></span> adapté à vos besoins de mise à jour. Pour l’authentification, suivez le
+              <span class="tag">flux OAuth 2.0<span class="tag-card"><strong>ENTRÉE / SEC-0087</strong><span>Standard de
+                    sécurité interne · protocoles d’identité</span><small>Entreprise responsable</small></span></span>
+              défini dans la politique de sécurité de votre équipe.</p>
+          </div>
+          <div class="hint">⌁ &nbsp; Survolez ou cliquez sur un tag pour voir sa source</div>
+        </div>
+      </div>
+    </section>
 
-    <section class="section alt" id="features"><div class="wrap"><div class="section-intro"><div><div class="kicker">Pensé pour votre tranquillité</div><h2>Une bonne IA devrait<br>être aussi simple.</h2></div><p>Les protections essentielles, sans le poids d’un portail technique complexe.</p></div><div class="benefits"><article class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 7 4v5c0 4.6-3 7.4-7 9-4-1.6-7-4.4-7-9V7l7-4Z"/><path d="m8 12 2.5 2.5L16 9"/></svg></div><h3>Provenance complète</h3><p>Retracez chaque ligne produite jusqu’à sa licence et son document d’origine.</p></article><article class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></svg></div><h3>Privée &amp; hors ligne</h3><p>Tout fonctionne localement : votre code confidentiel et vos secrets d’entreprise restent à vous.</p></article><article class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></div><h3>Basée sur vos données</h3><p>Des recherches structurées pour des réponses précises, sans hallucinations ni lourdeur inutile.</p></article></div></div></section>
-    <section class="section" id="pricing"><div class="wrap"><div class="section-intro"><div><div class="kicker">Des tarifs sans surprise</div><h2>Choisissez votre<br>niveau de confiance.</h2></div><p>Commencez simplement, puis évoluez quand votre équipe grandit.</p></div><div class="pricing"><article class="price-card"><h3>Édition individuelle</h3><p>Pour une utilisation personnelle, avec une licence qui vous appartient.</p><div class="price"><strong>100 €</strong><span>paiement unique</span></div><ul><li>Licence perpétuelle — édition 2026</li><li>5 ans de mises à jour de la base de données</li><li>Fonctionnement local et hors ligne</li></ul></article><article class="price-card featured"><span class="price-badge">Pour les équipes</span><h3>Offre Pro</h3><p>Pour les entreprises qui veulent déployer EthicAI sereinement.</p><div class="price"><strong>250 €</strong><span>par personne / an</span></div><ul><li>Tout ce qui est inclus dans l’édition individuelle</li><li>Mises à jour continues de la base</li><li>Déploiement équipe et support prioritaire</li></ul></article></div></div></section>
+    <section class="section" id="how">
+      <div class="wrap">
+        <div class="section-intro">
+          <div>
+            <div class="kicker">Une façon plus simple de travailler</div>
+            <h2>Comment fonctionne<br>EthicAI</h2>
+          </div>
+          <p>Un parcours calme et prévisible, de la connaissance vérifiée jusqu’à une réponse fiable.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="num">01</div>
+            <h3>Serveur central</h3>
+            <p>Diffuse des mises à jour sûres et vérifiées pour que chaque nœud reste à jour.</p>
+          </article>
+          <article class="step">
+            <div class="num">02</div>
+            <h3>Nœud local</h3>
+            <p>Fonctionne discrètement sur votre ordinateur ou votre réseau d’entreprise. Vos requêtes et votre code ne
+              quittent jamais votre appareil.</p>
+          </article>
+          <article class="step">
+            <div class="num">03</div>
+            <h3>Réponses honnêtes</h3>
+            <p>Fournit des réponses précises, ancrées dans votre base, avec attribution instantanée des sources.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="features">
+      <div class="wrap">
+        <div class="section-intro">
+          <div>
+            <div class="kicker">Pensé pour votre tranquillité</div>
+            <h2>Une bonne IA devrait<br>être aussi simple.</h2>
+          </div>
+          <p>Les protections essentielles, sans le poids d’un portail technique complexe.</p>
+        </div>
+        <div class="benefits">
+          <article class="benefit">
+            <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="m12 3 7 4v5c0 4.6-3 7.4-7 9-4-1.6-7-4.4-7-9V7l7-4Z" />
+                <path d="m8 12 2.5 2.5L16 9" />
+              </svg></div>
+            <h3>Provenance complète</h3>
+            <p>Retracez chaque ligne produite jusqu’à sa licence et son document d’origine.</p>
+          </article>
+          <article class="benefit">
+            <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="4" y="10" width="16" height="10" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2" />
+              </svg></div>
+            <h3>Privée &amp; hors ligne</h3>
+            <p>Tout fonctionne localement : votre code confidentiel et vos secrets d’entreprise restent à vous.</p>
+          </article>
+          <article class="benefit">
+            <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 5h16v14H4zM8 9h8M8 13h5" />
+              </svg></div>
+            <h3>Basée sur vos données</h3>
+            <p>Des recherches structurées pour des réponses précises, sans hallucinations ni lourdeur inutile.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="pricing">
+      <div class="wrap">
+        <div class="section-intro">
+          <div>
+            <div class="kicker">Des tarifs sans surprise</div>
+            <h2>Choisissez votre<br>niveau de confiance.</h2>
+          </div>
+          <p>Commencez simplement, puis évoluez quand votre équipe grandit.</p>
+        </div>
+        <div class="pricing">
+          <article class="price-card">
+            <h3>Édition individuelle</h3>
+            <p>Pour une utilisation personnelle, avec une licence qui vous appartient.</p>
+            <div class="price"><strong>1000 €</strong><span>paiement unique</span></div>
+            <ul>
+              <li>Licence perpétuelle — édition 2026</li>
+              <li>5 ans de mises à jour de la base de données</li>
+              <li>Fonctionnement local et hors ligne</li>
+            </ul>
+          </article>
+          <article class="price-card featured"><span class="price-badge">Pour les équipes</span>
+            <h3>Offre Pro</h3>
+            <p>Pour les entreprises qui veulent déployer EthicAI sereinement.</p>
+            <div class="price"><strong>250 €</strong><span>par personne / an</span></div>
+            <ul>
+              <li>Tout ce qui est inclus dans l’édition individuelle</li>
+              <li>Mises à jour continues de la base</li>
+              <li>Déploiement équipe et support prioritaire</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer id="start"><div class="wrap"><div class="footer-main"><h2>Construisez en confiance.<br><span style="color:#91eeb9">Commencez avec EthicAI.</span></h2><form class="signup" onsubmit="event.preventDefault(); this.querySelector('button').textContent='C’est noté ✓';"><input type="email" placeholder="vous@entreprise.fr" aria-label="Adresse e-mail professionnelle" required><button type="submit">Accéder en avant-première</button></form></div><div class="footer-bottom"><span>© 2024 EthicAI — L’IA fondée sur la confiance et la transparence.</span><div class="footer-links"><a href="#top">Confidentialité</a><a href="#top">Documentation ↗</a></div></div></div></footer>
+  <footer id="start">
+    <div class="wrap">
+      <div class="footer-main">
+        <h2>Construisez en confiance.<br><span style="color:#91eeb9">Commencez avec EthicAI.</span></h2>
+        <form class="signup"
+          onsubmit="event.preventDefault(); this.querySelector('button').textContent='C’est noté ✓';"><input
+            type="email" placeholder="vous@entreprise.fr" aria-label="Adresse e-mail professionnelle" required><button
+            type="submit">Accéder en avant-première</button></form>
+      </div>
+      <div class="footer-bottom"><span>© 2024 EthicAI — L’IA fondée sur la confiance et la transparence.</span>
+        <div class="footer-links"><a href="#top">Confidentialité</a><a href="#top">Documentation ↗</a></div>
+      </div>
+    </div>
+  </footer>
   <script>document.querySelectorAll('.tag').forEach(tag => tag.addEventListener('click', e => { e.stopPropagation(); document.querySelectorAll('.tag').forEach(other => { if (other !== tag) other.classList.remove('active'); }); tag.classList.toggle('active'); })); document.addEventListener('click', () => document.querySelectorAll('.tag').forEach(tag => tag.classList.remove('active')));</script>
 </body>
+
 </html>
