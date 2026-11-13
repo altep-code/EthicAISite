@@ -1,0 +1,1 @@
+This is a school project, we were asked to use AI, dont mind this.
