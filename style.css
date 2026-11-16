@@ -278,6 +278,37 @@
       margin: 0 0 3px;
     }
 
+    .video-slot {
+      overflow: hidden;
+      border: 1px solid #315342;
+      border-radius: 24px;
+      background: #123629;
+      box-shadow: 0 22px 55px rgba(18, 67, 48, .16);
+    }
+
+    .product-video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #123629;
+    }
+
+    .video-note {
+      margin: 15px 0 0;
+      color: #89958f;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .video-note code {
+      padding: 3px 6px;
+      border-radius: 5px;
+      background: var(--mint-2);
+      color: var(--green-dark);
+      font-family: 'DM Mono', monospace;
+      font-size: .95em;
+    }
+
     .preview {
       background: var(--card);
       border: 1px solid #edf2ef;
